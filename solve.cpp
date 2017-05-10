@@ -49,7 +49,7 @@ void solve::size()
 void solve::board()
 {
 	tab = new int *[y];
-	for (int i = 0; i <y; i++ )
+	for (int i = 0; i <=y; i++ )
 	{
 		tab[i] = new int[x];
 	}
@@ -64,13 +64,13 @@ void solve::typing()
 	int templ;
 	int k;
 
-	for (int i = 0; i < y; i++)
+	for (int i = 0; i <= y; i++)
 	{
 		k = 0;
 		getline(file, temp);
 		templ = temp.size() - 1;
 
-		for (int j = 0; j < x; j++)
+		for (int j = 0; j <= x; j++)
 		{
 			tab[i][j] = temp[k] - 48;
 			k++;
@@ -80,16 +80,58 @@ void solve::typing()
 	file.close();
 }
 
+int solve::searching()
+{
+	for (int i = 0; i <= y; i++)
+	{
+		if (tab[i][x] == 1)
+		{
+			tab[i][x] = 3;
+			return 1;
+		}
+	}
+
+	for (int i = 0; i <= x; i++)
+	{
+		if (tab[y][i] == 1)
+		{
+			tab[y][i] = 3;
+			return 1;
+			break;
+		}
+	}
+	return 3;
+
+}
+
+void solve::painting()
+{
+	for (int i = 0; i <= y; i++)
+	{
+		for (int j = 0; j <= x; j++)
+		{
+			if (tab[i][j] == 1)
+				cout << "* ";
+			else if (tab[i][j] == 0)
+				cout << "  ";
+			else if(tab[i][j] == 3 || tab[i][j] == 2)
+				cout << "X ";
+		}
+		cout << endl;
+	}
+}
+
 void solve::checking()
 {
-	for (int i = 0; i < y; i++)
+	for (int i = 0; i <= y; i++)
 	{
-		for (int j = 0; j < x; j++)
+		for (int j = 0; j <= x; j++)
 		{
 			cout << tab[i][j] << " ";
 		}
 		cout << endl;
 	}
+	//cout << x << y;
 }
 
 solve::~solve()

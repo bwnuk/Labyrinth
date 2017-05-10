@@ -20,7 +20,10 @@ public:
 	void reading();
 	void size();
 	void board();
-	void typing();
+	void filling();
+	int searching();
+	void painting();
 	void checking();
+	friend void error(solve k);
 };
 

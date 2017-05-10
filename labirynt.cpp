@@ -12,15 +12,32 @@
 
 using namespace std;
 
+void error(solve k)
+{
+	if (k.searching() == 3)
+	{
+		cout << "NOT FOUND EXIT" << endl;
+		system("pause");
+		exit(3);
+	}
+}
+
 int main()
 {
 	solve lab;
+	
 	lab.reading();
 	lab.size();
+	
 	lab.board();
-	//lab.checking();
-	lab.typing();
+	lab.filling();
+	
+	error(lab);
+	
+	lab.painting();
 	lab.checking();
+
 	system("pause");
+	
 	return 0;
 }
