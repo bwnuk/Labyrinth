@@ -8,6 +8,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <Windows.h>
+#include <vector>
 #include "solve.h"
 
 using namespace std;
@@ -34,6 +35,8 @@ int main()
 	
 	error(lab);
 	
+	lab.capabilities();
+
 	lab.painting();
 	lab.checking();
 
