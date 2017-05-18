@@ -15,20 +15,22 @@ public:
 	solve();
 	~solve();
 
-	//					Structur of Crosses
-	struct Crossing
-	{
-		int z; // X
-		int w; // Y
-		int direct;
-	};
-
+	//					POSSIBLE DIRECTIONS
 	enum directions
 	{
 		right = 0,
 		down = 1,
 		up = 2,
-		left = 3
+		left = 3,
+		default = 5
+	};
+
+	//					Structur of Crosse
+	struct Crossing
+	{
+		int z; // X
+		int w; // Y
+		directions direct;
 	};
 
 	//							COLUMN
@@ -37,6 +39,7 @@ public:
 	//							LINE
 	int y;
 
+	int iter;
 	int **tab;
 	int **tab_cap;
 
@@ -48,6 +51,7 @@ public:
 	int searching();
 	void capabilities();
 	void passage();
+	void going();
 	void painting();
 	void checking();
 

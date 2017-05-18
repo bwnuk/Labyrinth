@@ -214,6 +214,181 @@ void solve::capabilities()
 
 void solve::passage()
 {
+	vector <Crossing> cross;
+	int i = 0;
+	int j = 0;
+	iter = 0;
+	
+	directions last = default;
+	
+	Crossing temp = { i, j, last };
+	cross.push_back(temp);
+	iter++;
+
+	while (tab[i][j] != 3)
+	{
+		if (tab_cap[i][j] > 2)
+		{
+			if (tab[i][j + 1] > 0)
+			{
+				if (last != left)
+				{
+					last = right;
+					Crossing temp = { i, j, last};
+					cross.push_back(temp);
+					j++;
+					iter++;
+				}
+				else
+				{
+					iter--;
+					i = cross[iter].z;
+					j = cross[iter].w;
+					last = cross[iter].direct;
+				}
+			}
+			else if (tab[i + 1][j ] > 0)
+			{
+				if (last != up)
+				{
+					
+					last = down;
+					Crossing temp = { i, j, last };
+					cross.push_back(temp);
+					i++;
+					iter++;
+				}
+				else
+				{
+					iter--;
+					i = cross[iter].z;
+					j = cross[iter].w;
+					last = cross[iter].direct;
+				}
+			}
+			else if (tab[i - 1][j] > 0)
+			{
+				if (last != down)
+				{
+					
+					last = up;
+					Crossing temp = { i, j, last };
+					cross.push_back(temp);
+					i--;
+					iter++;
+				}
+				else
+				{
+					iter--;
+					i = cross[iter].z;
+					j = cross[iter].w;
+					last = cross[iter].direct;
+				}
+			}
+			else if (tab[i][j - 1] > 0)
+			{
+				if (last != right)
+				{
+					
+					last = left;
+					Crossing temp = { i, j, last };
+					cross.push_back(temp);
+					j--;
+					iter++;
+				}
+				else
+				{
+					iter--;
+					i = cross[iter].z;
+					j = cross[iter].w;
+					last = cross[iter].direct;
+				}
+			}
+			else
+			{
+				iter--;
+				i = cross[iter].z;
+				j = cross[iter].w;
+				last = cross[iter].direct;
+			}
+		}
+		//							When is 1 possible way
+		else
+		{
+			if (tab[i][j + 1] > 0)
+			{
+				if (last != left)
+				{
+					j++;
+					last = right;
+				}
+				else
+				{
+					iter--;
+					i = cross[iter].z;
+					j = cross[iter].w;
+					last = cross[iter].direct;
+				}
+			}
+			else if (tab[i + 1][j] > 0)
+			{
+				if (last != up)
+				{
+					i++;
+					last = down;
+				}
+				else
+				{
+					iter--;
+					i = cross[iter].z;
+					j = cross[iter].w;
+					last = cross[iter].direct;
+				}
+			}
+			else if (tab[i - 1][j] > 0)
+			{
+				if (last != down)
+				{
+					i--;
+					last = up;
+				}
+				else
+				{
+					iter--;
+					i = cross[iter].z;
+					j = cross[iter].w;
+					last = cross[iter].direct;
+				}
+			}
+			else if (tab[i][j - 1] > 0)
+			{
+				if (last != right)
+				{
+					j--;
+					last = left;
+				}
+				else
+				{
+					iter--;
+					i = cross[iter].z;
+					j = cross[iter].w;
+					last = cross[iter].direct;
+				}
+			}
+			else
+			{
+				iter--;
+				i = cross[iter].z;
+				j = cross[iter].w;
+				last = cross[iter].direct;
+			}
+
+		}
+	}
+}
+
+void solve::going()
+{
 
 }
 
@@ -225,9 +400,9 @@ void solve::painting()
 		for (int j = 0; j <= x; j++)
 		{
 			if (tab[i][j] == 1)
-				cout << "* ";
-			else if (tab[i][j] == 0)
 				cout << "  ";
+			else if (tab[i][j] == 0)
+				cout << "* ";
 			else if(tab[i][j] == 3 || tab[i][j] == 2)
 				cout << "X ";
 		}

@@ -36,6 +36,7 @@ int main()
 	error(lab);
 	
 	lab.capabilities();
+	lab.passage();
 
 	lab.painting();
 	lab.checking();
