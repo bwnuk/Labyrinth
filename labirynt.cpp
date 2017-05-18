@@ -15,12 +15,15 @@ using namespace std;
 
 void error(solve k)
 {
+
 	if (k.searching() == 3)
 	{
+		system("cls");
 		cout << "NOT FOUND EXIT" << endl;
 		system("pause");
 		exit(3);
 	}
+
 }
 
 int main()
@@ -33,10 +36,14 @@ int main()
 	lab.board();
 	lab.filling();
 	
+	// lab.searchin();
 	error(lab);
 	
 	lab.capabilities();
 	lab.passage();
+
+	lab.road();
+
 
 	lab.painting();
 	lab.checking();

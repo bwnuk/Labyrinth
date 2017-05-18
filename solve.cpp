@@ -214,7 +214,7 @@ void solve::capabilities()
 
 void solve::passage()
 {
-	vector <Crossing> cross;
+	
 	int i = 0;
 	int j = 0;
 	iter = 0;
@@ -387,9 +387,84 @@ void solve::passage()
 	}
 }
 
-void solve::going()
-{
+//										LEAVING ROAD
 
+void solve::road()
+{
+	int j = 0;
+	int i = 0;
+	int iterr = 1;
+	directions last = default;
+
+	while (tab[i][j] != 3)
+	{
+		if (tab_cap[i][j] > 2)
+		{
+			last = cross[iterr].direct;
+			if (cross[iterr].z == i || cross[iterr].w == j)
+			{
+				iterr++;
+				switch (last)
+				{
+				case 0:
+					tab[i][j] = 4;
+					j++;
+					last = right;
+					break;
+				case 1:
+					tab[i][j] = 4;
+					i++;
+					last = up;
+					break;
+				case 2:
+					tab[i][j] = 4;
+					i--;
+					last = down;
+					break;
+				case 3:
+					tab[i][j] = 4;
+					j--;
+					last = left;
+				case 5:
+					exit(5);
+					break;
+				}
+			}
+			else
+				exit(6);
+		}
+		else
+		{
+			if (tab[i][j + 1] > 0)
+			{
+					tab[i][j] = 4;
+					j++;
+					last = right;
+			}
+			else if (tab[i + 1][j] > 0)
+			{
+				tab[i][j] = 4;
+				i++;
+				last = down;
+			}
+			else if (tab[i - 1][j] > 0)
+			{
+				tab[i][j] = 4;
+				i--;
+				last = up;
+			}
+			else if (tab[i][j - 1] > 0)
+			{
+				tab[i][j] = 4;
+				j--;
+				last = left;
+			}
+			else
+			{
+				exit(4);
+			}
+		}
+	}
 }
 
 //												CONSOLE PAINTING
@@ -403,8 +478,10 @@ void solve::painting()
 				cout << "  ";
 			else if (tab[i][j] == 0)
 				cout << "* ";
-			else if(tab[i][j] == 3 || tab[i][j] == 2)
+			else if (tab[i][j] == 3 || tab[i][j] == 2)
 				cout << "X ";
+			else if (tab[i][j] == 4)
+				cout << "o ";
 		}
 		cout << endl;
 	}

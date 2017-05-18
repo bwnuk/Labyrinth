@@ -42,6 +42,7 @@ public:
 	int iter;
 	int **tab;
 	int **tab_cap;
+	vector <Crossing> cross;
 
 	//							FUNCTIONS ARE EXPLAINED IN SOLVE.CPP
 	void reading();
@@ -51,7 +52,7 @@ public:
 	int searching();
 	void capabilities();
 	void passage();
-	void going();
+	void road();
 	void painting();
 	void checking();
 
