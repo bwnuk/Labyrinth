@@ -212,6 +212,7 @@ void solve::capabilities()
 	}
 }
 
+//													Passing labyrinth
 void solve::passage()
 {
 	
