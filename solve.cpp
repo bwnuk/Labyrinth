@@ -120,108 +120,49 @@ int solve::searching()
 //									FILLING TABLE WITH CAPABILITIES OF MOVES
 void solve::capabilities()
 {
-	int temp_x = x - 1;
-	int temp_y = y - 1;
+	int temp_x = x;
+	int temp_y = y;
 	int i = 0;
 	int j = 0;
 
-	for ( i = 1; i <= temp_y; i++)
+	for (i = 0; i <= temp_y; i++)
 	{
-		for ( j = 1; j <= temp_x; j++)
+		for (j = 0; j <= temp_x; j++)
 		{
 			tab_cap[i][j] = 0;
-			if (tab[i][j + 1] == 1)
-				tab_cap[i][j] += 1;
 
-			if (tab[i][j - 1] == 1)
-				tab_cap[i][j] += 1;
+			if (tab[i][j] != 0)
+			{
+				if (j != temp_x)
+					if (tab[i][j + 1] == 1)
+						tab_cap[i][j] += 1;
 
-			if (tab[i + 1][j] == 1)
-				tab_cap[i][j] += 1;
+				if (j != 0)
+					if (tab[i][j - 1] == 1 || tab[i][j - 1] == 2)
+						tab_cap[i][j] += 1;
+				if (i != temp_y)
+					if (tab[i + 1][j] == 1)
+						tab_cap[i][j] += 1;
 
-			if (tab[i - 1][j] == 1)
-				tab_cap[i][j] += 1;
+				if (i != 0)
+					if (tab[i - 1][j] == 1 || tab[i - 1][j] == 2)
+						tab_cap[i][j] += 1;
+			}
+
 		}
-	}
-
-	i = 0;
-	temp_x += 1;
-	temp_y += 1;
-
-	for (int j = 1; j <= temp_x; j++)
-	{
-		i = 0;
-
-		tab_cap[i][j] = 0;
-
-		if( j !=0)
-			if (tab[i][j - 1] == 1)
-				tab_cap[i][j] += 1;
-		
-		if(j!=temp_x)
-			if (tab[i][j + 1] == 1)
-				tab_cap[i][j] += 1;
-
-		if (tab[i + 1][j] == 1)
-			tab_cap[i][j] += 1;
-		
-		i = temp_y;
-		tab_cap[i][j] = 0;
-
-		if (j != 0)
-			if (tab[i][j - 1] == 1)
-				tab_cap[i][j] += 1;
-
-		if (j != temp_x)
-			if (tab[i][j + 1] == 1)
-				tab_cap[i][j] += 1;
-
-		if (tab[i - 1][j] == 1)
-			tab_cap[i][j] += 1;
-	}
-
-	for (int i = 0; i <= temp_y; i++)
-	{
-		j = 0;
-		tab_cap[i][j] = 0;
-
-		if (i != 0)
-			if (tab[i - 1][j] == 1)
-				tab_cap[i][j] += 1;
-
-		if (i != temp_y)
-			if (tab[i + 1][j] == 1)
-				tab_cap[i][j] += 1;
-
-		if (tab[i][j + 1] == 1)
-			tab_cap[i][j] += 1;
-
-		j = temp_x;
-		tab_cap[i][j] = 0;
-
-		if (i != 0)
-			if (tab[i - 1][j] == 1)
-				tab_cap[i][j] += 1;
-
-		if (i != temp_y)
-			if (tab[i + 1][j] == 1)
-				tab_cap[i][j] += 1;
-
-		if (tab[i][j - 1] == 1)
-			tab_cap[i][j] += 1;
 	}
 }
 
 //													Passing labyrinth
 void solve::passage()
 {
-	
+
 	int i = 0;
 	int j = 0;
 	iter = 0;
-	
+
 	directions last = default;
-	
+
 	Crossing temp = { i, j, last };
 	cross.push_back(temp);
 	iter++;
@@ -235,7 +176,7 @@ void solve::passage()
 				if (last != left)
 				{
 					last = right;
-					Crossing temp = { i, j, last};
+					Crossing temp = { i, j, last };
 					cross.push_back(temp);
 					j++;
 					iter++;
@@ -248,11 +189,11 @@ void solve::passage()
 					last = cross[iter].direct;
 				}
 			}
-			else if (tab[i + 1][j ] > 0)
+			else if (tab[i + 1][j] > 0)
 			{
 				if (last != up)
 				{
-					
+
 					last = down;
 					Crossing temp = { i, j, last };
 					cross.push_back(temp);
@@ -271,7 +212,7 @@ void solve::passage()
 			{
 				if (last != down)
 				{
-					
+
 					last = up;
 					Crossing temp = { i, j, last };
 					cross.push_back(temp);
@@ -290,7 +231,7 @@ void solve::passage()
 			{
 				if (last != right)
 				{
-					
+
 					last = left;
 					Crossing temp = { i, j, last };
 					cross.push_back(temp);
@@ -387,6 +328,7 @@ void solve::passage()
 		}
 	}
 }
+
 
 //										LEAVING ROAD
 
