@@ -10,6 +10,7 @@
 #include <Windows.h>
 #include <vector>
 #include "solve.h"
+#include "game.h"
 
 using namespace std;
 
@@ -40,13 +41,27 @@ int main()
 	error(lab);
 	
 	lab.capabilities();
-	lab.passage();
 
-	lab.road();
-
-
-	lab.painting();
+	cout << "tab_cap" << endl;
 	lab.checking();
+	cout << endl;
+
+	lab.passage();
+	cout << "tab" << endl;
+	lab.checking1();
+	lab.road();
+	cout << endl; 
+
+	cout << "View" << endl;
+	lab.painting();
+	cout << endl;
+	
+	cout << "tab_cap" << endl;
+	lab.checking();
+	cout << endl;
+	
+	cout << "tab" << endl;
+	lab.checking1();
 
 	system("pause");
 	

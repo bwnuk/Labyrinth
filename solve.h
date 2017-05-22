@@ -11,9 +11,7 @@ using namespace std;
 
 class solve
 {
-public:
-	solve();
-	~solve();
+private:
 
 	//					POSSIBLE DIRECTIONS
 	enum directions
@@ -31,7 +29,14 @@ public:
 		int z; // X
 		int w; // Y
 		directions direct;
+		directions last_cross;
 	};
+
+	int **tab_cap;
+	vector <Crossing> cross;
+	int iter;
+
+protected:
 
 	//							COLUMN
 	int x;
@@ -39,10 +44,13 @@ public:
 	//							LINE
 	int y;
 
-	int iter;
+	
 	int **tab;
-	int **tab_cap;
-	vector <Crossing> cross;
+	
+public:
+
+	solve();
+	~solve();
 
 	//							FUNCTIONS ARE EXPLAINED IN SOLVE.CPP
 	void reading();
@@ -55,6 +63,7 @@ public:
 	void road();
 	void painting();
 	void checking();
+	void checking1();
 
 	//								ERROR WITH NOT FOUNDING A FILE
 	friend void error(solve k);

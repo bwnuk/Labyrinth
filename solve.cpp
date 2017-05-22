@@ -162,24 +162,26 @@ void solve::passage()
 	iter = 0;
 
 	directions last = default;
-
-	Crossing temp = { i, j, last };
+	directions last_crs = default;
+	Crossing temp = { i, j, last, last_crs };
 	cross.push_back(temp);
 	iter++;
 
 	while (tab[i][j] != 3)
 	{
-		if (tab_cap[i][j] > 2)
+		if (tab_cap[i][j] > 2 )
 		{
-			if (tab[i][j + 1] > 0)
+			if (tab[i][j + 1] > 0 && last_crs != right)
 			{
-				if (last != left)
+				if (last != left )
 				{
 					last = right;
-					Crossing temp = { i, j, last };
+					last_crs = right;
+					Crossing temp = { i, j, last, last_crs };
 					cross.push_back(temp);
 					j++;
 					iter++;
+					last_crs = default;
 				}
 				else
 				{
@@ -187,18 +189,20 @@ void solve::passage()
 					i = cross[iter].z;
 					j = cross[iter].w;
 					last = cross[iter].direct;
+					last_crs = cross[iter].last_cross;
 				}
 			}
-			else if (tab[i + 1][j] > 0)
+			else if (tab[i + 1][j] > 0 && last_crs != down )
 			{
-				if (last != up)
+				if (last != up )
 				{
-
+					last_crs = down;
 					last = down;
-					Crossing temp = { i, j, last };
+					Crossing temp = { i, j, last, last_crs };
 					cross.push_back(temp);
 					i++;
 					iter++;
+					last_crs = default;
 				}
 				else
 				{
@@ -206,18 +210,20 @@ void solve::passage()
 					i = cross[iter].z;
 					j = cross[iter].w;
 					last = cross[iter].direct;
+					last_crs = cross[iter].last_cross;
 				}
 			}
-			else if (tab[i - 1][j] > 0)
+			else if (tab[i - 1][j] > 0 && last_crs != up)
 			{
-				if (last != down)
+				if (last != down )
 				{
-
+					last_crs = down;
 					last = up;
-					Crossing temp = { i, j, last };
+					Crossing temp = { i, j, last, last_crs };
 					cross.push_back(temp);
 					i--;
 					iter++;
+					last_crs = default;
 				}
 				else
 				{
@@ -225,18 +231,20 @@ void solve::passage()
 					i = cross[iter].z;
 					j = cross[iter].w;
 					last = cross[iter].direct;
+					last_crs = cross[iter].last_cross;
 				}
 			}
-			else if (tab[i][j - 1] > 0)
+			else if (tab[i][j - 1] > 0 && last_crs != left)
 			{
-				if (last != right)
+				if (last != right )
 				{
-
+					last_crs = left;
 					last = left;
-					Crossing temp = { i, j, last };
+					Crossing temp = { i, j, last, last_crs };
 					cross.push_back(temp);
 					j--;
 					iter++;
+					last_crs = default;
 				}
 				else
 				{
@@ -244,6 +252,7 @@ void solve::passage()
 					i = cross[iter].z;
 					j = cross[iter].w;
 					last = cross[iter].direct;
+					last_crs = cross[iter].last_cross;
 				}
 			}
 			else
@@ -252,70 +261,30 @@ void solve::passage()
 				i = cross[iter].z;
 				j = cross[iter].w;
 				last = cross[iter].direct;
+				last_crs = cross[iter].last_cross;
 			}
 		}
-		//							When is 1 possible way
-		else
+		else //							When is 1 possible way
 		{
-			if (tab[i][j + 1] > 0)
+			if (tab[i][j + 1] > 0 && last != left)
 			{
-				if (last != left)
-				{
-					j++;
-					last = right;
-				}
-				else
-				{
-					iter--;
-					i = cross[iter].z;
-					j = cross[iter].w;
-					last = cross[iter].direct;
-				}
+				j++;
+				last = right;
 			}
-			else if (tab[i + 1][j] > 0)
+			else if (tab[i + 1][j] > 0 && last != up)
 			{
-				if (last != up)
-				{
-					i++;
-					last = down;
-				}
-				else
-				{
-					iter--;
-					i = cross[iter].z;
-					j = cross[iter].w;
-					last = cross[iter].direct;
-				}
+				i++;
+				last = down;
 			}
-			else if (tab[i - 1][j] > 0)
+			else if (tab[i - 1][j] > 0 && last != down)
 			{
-				if (last != down)
-				{
-					i--;
-					last = up;
-				}
-				else
-				{
-					iter--;
-					i = cross[iter].z;
-					j = cross[iter].w;
-					last = cross[iter].direct;
-				}
+				i--;
+				last = up;
 			}
-			else if (tab[i][j - 1] > 0)
+			else if (tab[i][j - 1] > 0 && last != right)
 			{
-				if (last != right)
-				{
-					j--;
-					last = left;
-				}
-				else
-				{
-					iter--;
-					i = cross[iter].z;
-					j = cross[iter].w;
-					last = cross[iter].direct;
-				}
+				j--;
+				last = left;
 			}
 			else
 			{
@@ -323,8 +292,8 @@ void solve::passage()
 				i = cross[iter].z;
 				j = cross[iter].w;
 				last = cross[iter].direct;
+				last_crs = cross[iter].last_cross;
 			}
-
 		}
 	}
 }
@@ -430,8 +399,7 @@ void solve::painting()
 	}
 }
 
-//									FOR ME - CHECKING TABLES
-void solve::checking()
+void solve::checking1()
 {
 	for (int i = 0; i <= y; i++)
 	{
@@ -441,9 +409,11 @@ void solve::checking()
 		}
 		cout << endl;
 	}
+}
 
-	cout << endl;
-
+//									FOR ME - CHECKING TABLES
+void solve::checking()
+{
 	for (int i = 0; i <= y; i++)
 	{
 		for (int j = 0; j <= x; j++)
