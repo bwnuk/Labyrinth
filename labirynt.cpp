@@ -37,7 +37,7 @@ int main()
 	lab.board();
 	lab.filling();
 	
-	// lab.searchin();
+	//lab.searchin();
 	error(lab);
 	
 	lab.capabilities();
