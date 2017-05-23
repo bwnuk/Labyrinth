@@ -202,6 +202,7 @@ void solve::passage()
 						cross.push_back(temp);
 					}
 
+					last_crs = default;
 					j++;
 				}
 				else
@@ -232,6 +233,8 @@ void solve::passage()
 						Crossing temp = { i, j, last, last_crs };
 						cross.push_back(temp);
 					}
+
+					last_crs = default;
 					i++;
 				}
 				else
@@ -261,6 +264,8 @@ void solve::passage()
 						Crossing temp = { i, j, last, last_crs };
 						cross.push_back(temp);
 					}
+
+					last_crs = default;
 					i--;
 				}
 				else
@@ -291,6 +296,7 @@ void solve::passage()
 						cross.push_back(temp);
 					}
 
+					last_crs = default;
 					j--;
 				}
 				else
@@ -353,6 +359,7 @@ void solve::road()
 	int j = 1;
 	int i = 1;
 	int iterr = 1;
+	
 	directions last = default;
 
 	while (tab[i][j] != 3)
@@ -360,38 +367,35 @@ void solve::road()
 		if (tab_cap[i][j] > 2)
 		{
 			last = cross[iterr].last_cross;
-
-			if (cross[iterr].z == i && cross[iterr].w == j)
+			iterr++;
+			
+			switch (last)
 			{
-				iterr++;
-				switch (last)
-				{
-				case 0:
-					tab[i][j] = 4;
-					j++;
-					last = right;
-					break;
-				case 1:
-					tab[i][j] = 4;
-					i++;
-					last = up;
-					break;
-				case 2:
-					tab[i][j] = 4;
-					i--;
-					last = down;
-					break;
-				case 3:
-					tab[i][j] = 4;
-					j--;
-					last = left;
-				case 5:
-					exit(5);
-					break;
-				}
+			case 0:
+				tab[i][j] = 4;
+				j++;
+				last = right;
+				break;
+			case 1:
+				tab[i][j] = 4;
+				i++;
+				last = up;
+				break;
+			case 2:
+				tab[i][j] = 4;
+				i--;
+				last = down;
+				break;
+			case 3:
+				tab[i][j] = 4;
+				j--;
+				last = left;
+				break;
+			case 5:
+				exit(5);
+				break;
 			}
-			else
-				exit(6);
+			
 		}
 		else
 		{
