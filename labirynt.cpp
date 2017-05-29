@@ -42,26 +42,25 @@ int main()
 	
 	lab.capabilities();
 
+	/*
 	cout << "tab_cap" << endl;
 	lab.checking();
 	cout << endl;
+	*/
 
 	lab.passage();
+
+	/*
 	cout << "tab" << endl;
 	lab.checking1();
-	lab.road();
-	cout << endl; 
+	cout << 
+	endl;
+	*/
+	lab.road();	
 
 	cout << "View" << endl;
 	lab.painting();
 	cout << endl;
-	
-	cout << "tab_cap" << endl;
-	lab.checking();
-	cout << endl;
-	
-	cout << "tab" << endl;
-	lab.checking1();
 
 	system("pause");
 	
