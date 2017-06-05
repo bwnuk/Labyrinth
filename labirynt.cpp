@@ -9,6 +9,7 @@
 #include <cstdlib>
 #include <Windows.h>
 #include <vector>
+#include <conio.h>
 #include "solve.h"
 #include "game.h"
 
@@ -27,28 +28,36 @@ void error(solve k)
 
 }
 
+void move(int xx, int yy) 
+{
+	COORD c;
+	c.X = xx - 1;
+	c.Y = yy - 1;
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), c);
+}
+
 int main()
 {
-	solve lab;
+	/*solve lab;
 	
 	lab.reading();
 	lab.size();
 	
 	lab.board();
-	lab.filling();
+	lab.filling();*/
 	
 	//lab.searchin();
-	error(lab);
+	/*error(lab);
 	
 	lab.capabilities();
-
+*/
 	/*
 	cout << "tab_cap" << endl;
 	lab.checking();
 	cout << endl;
 	*/
 
-	lab.passage();
+	//lab.passage();
 
 	/*
 	cout << "tab" << endl;
@@ -56,12 +65,14 @@ int main()
 	cout << 
 	endl;
 	*/
-	lab.road();	
+	/*lab.road();	
 
 	cout << "View" << endl;
 	lab.painting();
 	cout << endl;
-
+*/
+	game lab;
+	lab.menu();
 	system("pause");
 	
 	return 0;

@@ -16,11 +16,11 @@ private:
 	//					POSSIBLE DIRECTIONS
 	enum directions
 	{
-		right = 0,
-		down = 1,
-		up = 2,
-		left = 3,
-		default = 5
+		right = 1,
+		down = 2,
+		up = 3,
+		left = 4,
+		default = -1
 	};
 
 	//					Structur of Crosse
@@ -28,8 +28,8 @@ private:
 	{
 		int z; // X
 		int w; // Y
-		directions direct;
 		directions last_cross;
+		directions f;
 	};
 
 	int **tab_cap;
@@ -68,4 +68,3 @@ public:
 	//								ERROR WITH NOT FOUNDING A FILE
 	friend void error(solve k);
 };
-
